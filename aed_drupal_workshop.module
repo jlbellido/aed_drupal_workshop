@@ -3,3 +3,38 @@
 /**
  * @file Contains drupal hooks definitions.
  */
+
+/**
+ * Implements hook_menu().
+ */
+function aed_drupal_workshop_menu() {
+  $items = array();
+
+  //Url parameter example path:
+  $items['aed-drupal-workshop/url-param/%'] = array(
+    'title' => 'Url example parameter',
+    'description' => 'Show Url parameter example page',
+    'page callback' => 'aed_drupal_workshop_url_param',
+    'page arguments' =>array(2),
+    'access callback' =>'user_access',
+    'access arguments' =>array('aed drupal workshop examples'),
+    'file' => 'aed_drupal_workshop.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function aed_drupal_workshop_permission() {
+  $permissions = array();
+
+  // Permission for access to workshop examples:
+  $permissions['aed drupal workshop examples'] = array(
+    'title' => t('AED Drupal workshop examples'),
+    'description' => t('Access to AED drupal Workshop examples'),
+  );
+
+  return $permissions;
+}
