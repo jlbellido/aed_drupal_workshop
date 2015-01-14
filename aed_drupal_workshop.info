@@ -1,0 +1,3 @@
+name = AED Drupal Workshop
+description = Drupal module example for AED workshops.
+core = 7.x
