@@ -38,3 +38,21 @@ function aed_drupal_workshop_permission() {
 
   return $permissions;
 }
+
+/**
+ *  Implements hook_theme().
+ */
+function aed_drupal_workshop_theme($existing, $type, $theme, $path) {
+  $themes = array();
+
+  $themes['url_parameter'] = array(
+    'variables' => array(
+      'param' => '',
+      'header_text' => '',
+    ),
+    'template' => 'aed_drupal_workshop_url_parameter',
+    'path' => drupal_get_path('module', 'aed_drupal_workshop') . '/templates',
+  );
+
+  return $themes;
+}
