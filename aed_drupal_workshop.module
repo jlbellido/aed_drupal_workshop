@@ -9,7 +9,9 @@
  */
 function aed_drupal_workshop_menu() {
   $items = array();
-
+  // More info about drupal routing system and hook_menu :
+  // hook_menu(): https://api.drupal.org/api/drupal/modules%21system%21system.api.php/function/hook_menu/7
+  // Menu system in Drupal 7 : https://api.drupal.org/api/drupal/includes!menu.inc/group/menu/7
   //Url parameter example path:
   $items['aed-drupal-workshop/url-param/%'] = array(
     'title' => 'Url example parameter',
@@ -44,15 +46,16 @@ function aed_drupal_workshop_permission() {
  */
 function aed_drupal_workshop_theme($existing, $type, $theme, $path) {
   $themes = array();
-
+  // In Drupal you can define Themes functions wich return a specific HTML output
+  // an example is the following :
   $themes['url_parameter'] = array(
-    'variables' => array(
+    'variables' => array( // Variables for the theme
       'param' => '',
       'header_text' => '',
       'node_rendered' => '',
     ),
-    'template' => 'aed_drupal_workshop_url_parameter',
-    'path' => drupal_get_path('module', 'aed_drupal_workshop') . '/templates',
+    'template' => 'aed_drupal_workshop_url_parameter', // Template file for render the output.
+    'path' => drupal_get_path('module', 'aed_drupal_workshop') . '/templates', // Path where the template is located.
   );
 
   return $themes;
@@ -66,12 +69,14 @@ function aed_drupal_workshop_check_node_exists($param) {
   // We can do static queries as:
   $query = db_query('SELECT nid FROM {node} WHERE nid = :nid', array(':nid' => $param));
 
-  //Also We can use a dinamic query:
-  /*$query = db_select('node', 'n')
-    ->fields('n')
-    ->condition('nid', $param, '=')
-    ->execute();
-  */
+  /* Also we can use a dinamic query:
+   *  $query = db_select('node', 'n')
+   *    ->fields('n')
+   *    ->condition('nid', $param, '=')
+   *    ->execute();
+   *
+   * More info about dinamic queries: https://www.drupal.org/node/310075
+   */
 
   return (boolean)$query->rowCount();
 }

@@ -1,0 +1,9 @@
+.container {
+    padding: 10px;
+}
+.container-header {
+    color: #ff0000;
+}
+.container-body {
+    background-color: #6f9dbd;
+}
