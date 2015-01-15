@@ -49,10 +49,29 @@ function aed_drupal_workshop_theme($existing, $type, $theme, $path) {
     'variables' => array(
       'param' => '',
       'header_text' => '',
+      'node_rendered' => '',
     ),
     'template' => 'aed_drupal_workshop_url_parameter',
     'path' => drupal_get_path('module', 'aed_drupal_workshop') . '/templates',
   );
 
   return $themes;
+}
+
+/**
+ * Check if a node exists given a valid $param.
+ * @param $param
+ */
+function aed_drupal_workshop_check_node_exists($param) {
+  // We can do static queries as:
+  $query = db_query('SELECT nid FROM {node} WHERE nid = :nid', array(':nid' => $param));
+
+  //Also We can use a dinamic query:
+  /*$query = db_select('node', 'n')
+    ->fields('n')
+    ->condition('nid', $param, '=')
+    ->execute();
+  */
+
+  return (boolean)$query->rowCount();
 }
